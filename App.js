@@ -33,21 +33,25 @@ export default function App() {
           setVille(response.name);
           setTemperature(response.main.temp)
           setDescription(response.weather[0].description)
-          //setIcone(response.weather[0].icon + ".png")
+          setIcone(response.weather[0].icon)
     })
   }
-  let text = 'Application en cours, veuillez patienter';
+  let text = 'Application en cours de chargement, veuillez patienter...';
 
   useEffect( () => {
     location && MeteoVille();
   })
 
   return (
+      <View>
       <View style={styles.container}>
-        <Text style={styles.paragraph}>{ville}</Text>
-        <Text style={styles.paragraph}>{temperature}</Text>
+        <Text>Vous êtes actuellement dans la ville de</Text><Text style={styles.styleville} > {ville}</Text>
+        <Text style={styles.paragraph}>{temperature}°C</Text>
         <Text style={styles.paragraph}>{description}</Text>
-
+        <Image style={styles.image} source={{
+          uri: `http://openweathermap.org/img/w/${icone}.png`
+        }}></Image>
+      </View>
       </View>
   );
 }
@@ -63,4 +67,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
   },
+  styleville: {
+    fontWeight:"bold",
+  },
+  image:{
+      width: 50,
+      height: 50,
+  }
 });
