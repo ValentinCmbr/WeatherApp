@@ -36,22 +36,21 @@ export default function App() {
           setIcone(response.weather[0].icon)
     })
   }
-  let text = 'Application en cours de chargement, veuillez patienter...';
 
   useEffect( () => {
     location && MeteoVille();
   })
 
   return (
-      <View>
+      <View style={styles.container}>
         {location == null ?<ActivityIndicator size="large"/> : null}
         <Image style={styles.image} source={{
           uri: `http://openweathermap.org/img/w/${icone}.png`
         }}></Image>
-      <View style={styles.container}>
+        <View style={styles.text}>
         <Text>Vous êtes actuellement dans la ville de</Text><Text style={styles.styleville} > {ville}</Text>
         <Text>La température extérieure est de {temperature}°C</Text>
-        <Text>Le temps actuel est : {description}</Text>
+        <Text>{description}</Text>
       </View>
       </View>
   );
@@ -60,13 +59,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
     padding: 20,
-  },
-  paragraph: {
-    fontSize: 18,
-    textAlign: 'center',
+    backgroundColor: "lightcyan",
   },
   styleville: {
     fontWeight:"bold",
@@ -74,5 +68,8 @@ const styles = StyleSheet.create({
   image:{
       width: 75,
       height: 75,
+  },
+  text:{
+    alignItems:"center",
   }
 });
