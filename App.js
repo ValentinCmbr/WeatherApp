@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Platform, Text, View, StyleSheet, Image } from 'react-native';
+import { Platform, Text, View, StyleSheet, Image, ActivityIndicator } from 'react-native';
 import * as Location from 'expo-location';
 
 export default function App() {
@@ -44,13 +44,14 @@ export default function App() {
 
   return (
       <View>
-      <View style={styles.container}>
-        <Text>Vous êtes actuellement dans la ville de</Text><Text style={styles.styleville} > {ville}</Text>
-        <Text style={styles.paragraph}>{temperature}°C</Text>
-        <Text style={styles.paragraph}>{description}</Text>
+        {location == null ?<ActivityIndicator size="large"/> : null}
         <Image style={styles.image} source={{
           uri: `http://openweathermap.org/img/w/${icone}.png`
         }}></Image>
+      <View style={styles.container}>
+        <Text>Vous êtes actuellement dans la ville de</Text><Text style={styles.styleville} > {ville}</Text>
+        <Text>La température extérieure est de {temperature}°C</Text>
+        <Text>Le temps actuel est : {description}</Text>
       </View>
       </View>
   );
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
     fontWeight:"bold",
   },
   image:{
-      width: 50,
-      height: 50,
+      width: 75,
+      height: 75,
   }
 });
