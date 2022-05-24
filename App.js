@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Platform, Text, View, StyleSheet, Image, ActivityIndicator } from 'react-native';
+import { Platform, Text, View, StyleSheet, Image, ActivityIndicator, FlatList } from 'react-native';
 import * as Location from 'expo-location';
 
 export default function App() {
@@ -51,17 +51,6 @@ export default function App() {
     location && MeteoVille()
      location && MeteoDaily()
   })
-
-    const Item = ({ daily }) => (
-        <View>
-            <Text>{daily[0].temp.day}</Text>
-        </View>
-    );
-
-    const App = () => {
-        const prevision = ({ item }) => (
-            <Item title={item.daily} />
-        );
         return (
       <View style={styles.container}>
         {location == null ?<ActivityIndicator size="large"/> : null}
@@ -72,9 +61,11 @@ export default function App() {
         <Text>Vous êtes actuellement dans la ville de</Text><Text style={styles.styleville} > {ville}</Text>
         <Text>La température extérieure est de {temperature}°C</Text>
         <Text>{description}</Text>
-            <flatList>
-                renderItem={prevision}
-            </flatList>
+            <FlatList
+                data = {prevision}
+                renderItem={({item}) =>
+                <Text>{item.temp.max}</Text>}
+                />
       </View>
       </View>
   );
@@ -96,4 +87,4 @@ const styles = StyleSheet.create({
   text:{
     alignItems:"center",
   }
-})};
+});
