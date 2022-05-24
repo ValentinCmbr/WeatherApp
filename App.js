@@ -64,7 +64,7 @@ export default function App() {
             <FlatList
                 data = {prevision}
                 renderItem={({item}) =>
-                <Text>{item.temp.max}</Text>}
+                <Text>{item.temp.day}</Text>}
                 />
       </View>
       </View>
